@@ -6,4 +6,9 @@ module.exports = {
         return sentenceParts.verbs;
     },
 
+    create(verb) {
+        sentenceParts.verbs.push(verb);
+        return verb;
+    },
+
 };

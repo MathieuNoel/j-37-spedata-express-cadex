@@ -1,3 +1,11 @@
+// Récupération de mes models
+const {
+    name,
+    adjective,
+    verb,
+    complement,
+} = require('../../models');
+
 // Tout fichier de test doit soit contenir .test dans le nom soit être dans un répertoire nommé,
 // "__tests__" soit les 2. Bien sûr cela est configurable dans le fichier de config de Jest
 
@@ -42,6 +50,18 @@ describe('Method generate', () => {
 
     // La méthode describe fonctionne comme un test avec un callback qui va contenir l'ensemble des
     // test rattacher a cette catégorie
+
+    const names = name.findAll();
+    const adjectives = adjective.findAll();
+    const verbs = verb.findAll();
+    const complements = complement.findAll();
+    const collections = {
+        names,
+        adjectives,
+        verbs,
+        complements,
+    };
+
     it('should return a string when cast as string', () => {
         // On test tout d'abord qu'on recois bien quelque chose
         expect(cadex.generate).toBeTruthy();
@@ -56,17 +76,27 @@ describe('Method generate', () => {
             // C'est sur que c'est pas
         }
         */
-        expect(typeof `${cadex.generate()}`).toBe('string');
+        expect(typeof `${cadex.generate(collections)}`).toBe('string');
         // Ici je fais que tester si la methode cater en string renvoi bien une string. Mais ce
         // n'est pas suffisant car dans les cas un objet renvoi une string '[object Object]' quand
         // il est caster en string.
 
         // Je vais donc une attente supplémentaire dans le test courant, afin que celui-ci soit le
         // précis possible et le moins permissif.
-        expect(`${cadex.generate()}`).not.toBe('[object Object]');
+        expect(`${cadex.generate(collections)}`).not.toBe('[object Object]');
     });
 
     it('should return a object', () => {
-        expect(typeof cadex.generate()).toBe('object');
+        expect(typeof cadex.generate(collections)).toBe('object');
+    });
+
+    it('should return a string equal to "Mathieu attentif écoute le professeur"', () => {
+        expect(`${{
+            ...cadex.generate(collections),
+            name: 'Mathieu',
+            adjective: 'attentif',
+            verb: 'écoute',
+            complement: 'le professeur',
+        }}`).toBe('Mathieu attentif écoute le professeur');
     });
 });

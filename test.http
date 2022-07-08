@@ -1,0 +1,21 @@
+### Stockage des variables
+@endpoint = http://localhost:4000/
+
+### Récupération de l'ensemble des noms disponibles
+GET {{endpoint}}names
+
+### Récupération d'un cadex
+GET {{endpoint}}cadex
+
+
+### Récupération d'un cadex personnalisé
+GET {{endpoint}}cadex/?name=zohaer&verb=écoute
+
+
+### Récupération d'un cadex personnalisé en enrichissant les données de base
+POST {{endpoint}}cadex/
+content-type: application/json
+
+{
+    "name": "Yoann"
+}

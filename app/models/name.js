@@ -6,4 +6,9 @@ module.exports = {
         return sentenceParts.names;
     },
 
+    create(name) {
+        sentenceParts.names.push(name);
+        return name;
+    },
+
 };

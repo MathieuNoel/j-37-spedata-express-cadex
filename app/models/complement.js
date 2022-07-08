@@ -6,4 +6,9 @@ module.exports = {
         return sentenceParts.complements;
     },
 
+    create(complement) {
+        sentenceParts.complements.push(complement);
+        return complement;
+    },
+
 };

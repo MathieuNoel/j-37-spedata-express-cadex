@@ -6,4 +6,9 @@ module.exports = {
         return sentenceParts.adjectives;
     },
 
+    create(adjective) {
+        sentenceParts.adjectives.push(adjective);
+        return adjective;
+    },
+
 };
